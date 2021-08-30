@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>StockProper: Inventory Control System</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/style2.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <a class="logo" href=".">
+                    <img src="../assets/images/stockproper2.png" alt="stockproper" height="50">
+                  </a>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="."><i class="fas fa-user-circle"></i> Admin Profile</a>
+                </li>
+                
+              <li class="active">
+                  <a href="?users"><i class="fas fa-users"></i> Registered Users</a>
+              </li>
+              <li>
+                  <a href="?password-approval"><i class="fas fa-user"></i> Approve Password</a>
+              </li>
+            </ul>
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="../contact.html" class="download">Help Center</a>
+                </li>
+                <li>
+                    <a href="?logout" class="article">Log Out</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../about.html" style="font-size: medium;">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../privacy.html" style="font-size: medium;">Privacy Policy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../terms.html" style="font-size: medium;">Terms & Conditions</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Toggle Sidebar</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="../contact.html">Help Center</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <table id="example" style="width:100%" class="table table-striped table-bordered">
+                <div>
+                    <br> <p>Showing registered users</p>
+                </div>
+                <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Fullname</th>
+                    <th>Email</th>
+                    <th>Bus. Name</th>
+                    <th>Bus. Type</th>
+                    <th>Bus. Address</th>
+                    <th>Phone</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Delete User </th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php if (!$users){ echo '<tr><td>No Record Found</td></tr>'; } else{ foreach ($users as $user): ?>
+                <form method="POST">
+                    <tr>
+                        <td><?php echo $user['userid']; ?></td>
+                        <td><?php echo $user['fullname']; ?></td>
+                        <td><?php echo $user['email_address']; ?></td>
+                        <td><?php echo $user['business_name']; ?></td>
+                        <td><?php echo $user['business_type']; ?></td>
+                        <td><?php echo $user['business_address']; ?></td>
+                        <td><?php echo $user['phone']; ?></td>
+                        <td><?php echo $user['date']; ?></td>
+                        <td><?php echo $user['time']; ?></td>
+                        <td>
+                            <input type="hidden" name="id" value="<?php echo $user['userid']; ?>" >
+                            <input type="submit" class="btn btn-danger" name="action" value="Delete" />
+                        </td>
+                    </tr>
+                </form>
+                <?php endforeach; } ?>
+                </tbody>
+            </table>
+            <div class="line"></div>
+        </div>   
+        
+    </div>
+
+
+    
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
